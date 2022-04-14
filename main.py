@@ -2,7 +2,8 @@ import streamlit as st
 import pandas as pd
 import random as rand
 from PIL import Image
-import requests
+import os
+st.write(os.listdir())
 
 # import os
 # os.system(r"cd /D C:\Users\Abraham\miniconda3\envs\snowflakes\Scripts | streamlit run main.py")
