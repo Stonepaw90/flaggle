@@ -12,7 +12,7 @@ st.markdown("### Coded by [Abraham Holleran](https://github.com/Stonepaw90) :sun
 #https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/ad/512.png
 thing = "ad"
 st.image(f"https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/{thing}/512.png")
-st.stop()
+#st.stop()
 
 class flaggle:
     def __init__(self):
@@ -54,6 +54,7 @@ class flaggle:
         col = st.columns(2)
         #col[0].markdown(f"![What country flies this flag?]({self.country_dict['flag_url']})")
         col[1].image(self.country_dict['flag_url'], use_column_width=True, caption = "Country flag")
+        st.write(f"https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/{self.secret_country}/512.png")
         st.image(f"https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/{self.secret_country}/512.png",
                     caption = "Country Outline")
         try:
