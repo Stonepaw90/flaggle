@@ -54,7 +54,7 @@ class flaggle:
             st.title("Better luck next time!")
             return self
         for i in range(self.count):
-            st.write(self.count)
+            #st.write(self.count)
             # st.write(f"i = {i}")
             # if 'guess_list' in st.session_state:
             # st.write(st.session_state.guess_list)
