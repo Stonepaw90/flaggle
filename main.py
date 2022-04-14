@@ -29,7 +29,7 @@ class flaggle:
         self.secret_country = self.iso2[self.secret_flag_index]
         try:
             #self.png = Image.open(f"\\all-512\\{self.secret_country}\\512.png")
-            self.png = Image.open(f"\all-512\512.png")
+            self.png = Image.open(f"/all-512/512.png")
         except:
             self.choose_country()
         self.country_dict = self.flags_dict[self.secret_country]
