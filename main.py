@@ -23,15 +23,21 @@ class flaggle:
         self.flags_csv_len = len(self.flags_csv)
         self.flags_dict = {self.iso2[i]: {"country_name": self.countries[i], "flag_url": self.url[i]} for i in
                            range(self.flags_csv_len)}
+        self.tries = 0
 
     def choose_country(self):
         self.secret_flag_index = rand.randrange(self.flags_csv_len)
         self.secret_country = self.iso2[self.secret_flag_index]
-        try:
-            #self.png = Image.open(f"\\all-512\\{self.secret_country}\\512.png")
-            self.png = Image.open(f"/all-512/512.png")
-        except:
-            self.choose_country()
+        if self.tries < 6:
+            try:
+                #self.png = Image.open(f"\\all-512\\{self.secret_country}\\512.png")
+                self.png = Image.open(f"/all-512/512.png")
+            except:
+                self.choose_country()
+                self.tries += 1
+        else:
+            st.write("Error choosing")
+            st.stop()
         self.country_dict = self.flags_dict[self.secret_country]
         self.COUNTRY_TEXT = self.country_dict['country_name']
         self.country_len = len(self.COUNTRY_TEXT)
