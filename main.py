@@ -8,9 +8,9 @@ from PIL import Image
 # os.system("streamlit run main.py")
 st.set_page_config(page_title="Flaggle")#, page_icon=":world_map:")
 st.markdown("### Coded by [Abraham Holleran](https://github.com/Stonepaw90) :sunglasses:")
-st.write("wow this is not good")
+st.write("wow this is not rlly good")
 #https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/ad/512.png
-#st.image("https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/ad/512.png")
+st.image("https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/ad/512.png")
 st.stop()
 
 class flaggle:
