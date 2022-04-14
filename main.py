@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import random as rand
+from PIL import Image
+import requests
 
 # import os
 # os.system(r"cd /D C:\Users\Abraham\miniconda3\envs\snowflakes\Scripts | streamlit run main.py")
@@ -12,26 +14,33 @@ st.markdown("### Coded by [Abraham Holleran](https://github.com/Stonepaw90) :sun
 class flaggle:
     def __init__(self):
         flags_csv = pd.read_csv("flags_iso.csv")
-        flags_csv = flags_csv.drop('Alpha-2 code', axis=1)
-        flags_csv = flags_csv.rename(columns={"Alpha-3 code": "iso"})
+        flags_csv = flags_csv.rename(columns={"Alpha-3 code": "iso", "Alpha-2 code": "iso2"})
         flags_csv["URL"] = list(map(lambda s: s.replace("small/tn_", ""), flags_csv["URL"]))
         self.flags_csv = flags_csv
+        self.iso2 = self.flags_csv["iso2"]
         self.countries = list(map(str.lower, self.flags_csv["Country"]))
-        self.iso = self.flags_csv["iso"]
+        #self.iso = self.flags_csv["iso"]
         self.url = self.flags_csv["URL"]
         self.flags_csv_len = len(self.flags_csv)
-        self.flags_dict = {self.iso[i]: {"country_name": self.countries[i], "flag_url": self.url[i]} for i in
+        self.flags_dict = {self.iso2[i]: {"country_name": self.countries[i], "flag_url": self.url[i]} for i in
                            range(self.flags_csv_len)}
 
     def choose_country(self):
         self.secret_flag_index = rand.randrange(self.flags_csv_len)
-        self.secret_country = self.iso[self.secret_flag_index]
+        self.secret_country = self.iso2[self.secret_flag_index]
+        try:
+            self.png = Image.open(f"all-512\\{self.secret_country}\\512.png")
+        except:
+            self.choose_country()
         self.country_dict = self.flags_dict[self.secret_country]
         self.COUNTRY_TEXT = self.country_dict['country_name']
         self.country_len = len(self.COUNTRY_TEXT)
 
-    def print_flag(self):
-        st.markdown(f"![What country flies this flag?]({self.country_dict['flag_url']})")
+    def print_flag_and_png(self):
+        col = st.columns(2)
+        #col[0].markdown(f"![What country flies this flag?]({self.country_dict['flag_url']})")
+        col[1].image(self.country_dict['flag_url'], use_column_width=True, caption = "Country flag")
+        col[0].image(self.png, use_column_width=True, caption = "Country Outline")
 
     def print_blanks(self):
         blank_text = ['_'] * self.country_len
@@ -39,7 +48,7 @@ class flaggle:
             if self.COUNTRY_TEXT[i] == " ":
                 blank_text[i] = ' '
         self.blank_text = ''.join(blank_text)
-        st.title(self.blank_text)
+        st.title("The country name is " + self.blank_text + ".")
 
     def initialize_flaggle(self):
         st.session_state['flaggle'] = self
@@ -54,7 +63,7 @@ class flaggle:
             st.title("Better luck next time!")
             return self
         for i in range(self.count):
-            #st.write(self.count)
+            st.write(self.count)
             # st.write(f"i = {i}")
             # if 'guess_list' in st.session_state:
             # st.write(st.session_state.guess_list)
@@ -89,9 +98,8 @@ def main():
         flaggle_game.initialize_flaggle()
         st.experimental_rerun()  # now this loop will not be hit again
     flaggle_game = st.session_state['flaggle']
-    flaggle_game.print_flag()
+    flaggle_game.print_flag_and_png()
     flaggle_game.print_blanks()
-    # st.write(flaggle_game.COUNTRY_TEXT)
     st.session_state['flaggle'] = flaggle_game.get_guess()
     if st.button("Try again with different flag"):
         del st.session_state['flaggle']
