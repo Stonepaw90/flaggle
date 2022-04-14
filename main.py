@@ -11,7 +11,6 @@ st.markdown("### Coded by [Abraham Holleran](https://github.com/Stonepaw90) :sun
 st.write("wow this is not rlly good")
 #https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/ad/512.png
 st.image("https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/ad/512.png")
-st.stop()
 
 class flaggle:
     def __init__(self):
@@ -34,6 +33,7 @@ class flaggle:
     def choose_country(self):
         self.secret_flag_index = rand.randrange(self.flags_csv_len)
         self.secret_country = self.iso2[self.secret_flag_index]
+        """
         if self.tries < 6:
             try:
                 #self.png = Image.open(f"\\all-512\\{self.secret_country}\\512.png")
@@ -45,6 +45,7 @@ class flaggle:
         else:
             st.write("Error choosing")
             st.stop()
+        """
         self.country_dict = self.flags_dict[self.secret_country]
         self.COUNTRY_TEXT = self.country_dict['country_name']
         self.country_len = len(self.COUNTRY_TEXT)
@@ -53,7 +54,9 @@ class flaggle:
         col = st.columns(2)
         #col[0].markdown(f"![What country flies this flag?]({self.country_dict['flag_url']})")
         col[1].image(self.country_dict['flag_url'], use_column_width=True, caption = "Country flag")
-        col[0].image(self.png, use_column_width=True, caption = "Country Outline")
+        col[0].image("https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/ad/512.png",
+                    use_column_width = True, caption = "Country Outline")
+        #col[0].image(self.png, use_column_width=True, caption = "Country Outline")
 
     def print_blanks(self):
         blank_text = ['_'] * self.country_len
