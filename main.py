@@ -6,6 +6,8 @@ import os
 st.set_page_config(page_title="Flaggle")#, page_icon=":world_map:")
 st.markdown("### Coded by [Abraham Holleran](https://github.com/Stonepaw90) :sunglasses:")
 
+def no_image_match(listt):
+    pass
 
 class flaggle:
     def __init__(self):
@@ -61,35 +63,32 @@ class flaggle:
         if 'guest_list' not in st.session_state:
             st.session_state.guess_list = [''] * 10
         # st.write(f"count = {self.count}")
-        if self.count > 6:
-            try:
-                st.title(f"The answer was {self.COUNTRY_TEXT}.")
-                st.markdown("Your final guess resulted in" + self.to_print)
-                
-            except:
-                pass
-            st.title("Better luck next time!")
-            return self
-        for i in range(self.count):
+        for i in range(min(self.count, 6)):
             st.session_state.guess_list[i] = st.text_input(f"What is your {ordinal[i]} guess?",
                                                            placeholder=self.blank_text,
                                                            max_chars=self.country_len).lower()
             if st.session_state.guess_list[i]:
-                to_print = ""
+                self.to_print = ""
                 for idx, letter in enumerate(st.session_state.guess_list[i]):
                     if st.session_state.guess_list[i][idx] == self.COUNTRY_TEXT[idx]:
-                        to_print += "🟩"
+                        self.to_print += "🟩"
                     elif st.session_state.guess_list[i][idx] in self.COUNTRY_TEXT:
-                        to_print += "🟨"
+                        self.to_print += "🟨"
                     else:
-                        to_print += ":black_large_square:"
-                self.to_print = to_print
-                st.markdown(to_print)
-                if to_print == "🟩" * self.country_len:
-                    to_print = ""
+                        self.to_print += ":black_large_square:"
+                st.markdown(self.to_print)
+                if self.to_print == "🟩" * self.country_len:
+                    #self.to_print = ""
                     st.balloons()
                     st.title("You did it!!!")
-                    break
+                    return self
+        if self.count > 6:
+            try:
+                st.title(f"The answer was {self.COUNTRY_TEXT}.")
+            except:
+                pass
+            st.title("Better luck next time!")
+            return self
         self.count += 1
         return self
 
