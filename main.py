@@ -7,7 +7,7 @@ import requests
 # import os
 # os.system(r"cd /D C:\Users\Abraham\miniconda3\envs\snowflakes\Scripts | streamlit run main.py")
 # os.system("streamlit run main.py")
-st.set_page_config(page_title="Flaggle")
+st.set_page_config(page_title="Flaggle", page_icon=":world_map:")
 st.markdown("### Coded by [Abraham Holleran](https://github.com/Stonepaw90) :sunglasses:")
 
 
@@ -29,7 +29,7 @@ class flaggle:
         self.secret_flag_index = rand.randrange(self.flags_csv_len)
         self.secret_country = self.iso2[self.secret_flag_index]
         try:
-            self.png = Image.open(f"all-512\\{self.secret_country}\\512.png")
+            self.png = Image.open(f"\\all-512\\{self.secret_country}\\512.png")
         except:
             self.choose_country()
         self.country_dict = self.flags_dict[self.secret_country]
