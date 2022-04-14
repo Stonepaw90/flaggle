@@ -8,24 +8,21 @@ from PIL import Image
 # os.system("streamlit run main.py")
 st.set_page_config(page_title="Flaggle")#, page_icon=":world_map:")
 st.markdown("### Coded by [Abraham Holleran](https://github.com/Stonepaw90) :sunglasses:")
-st.write("wow this is not rlly good")
+#st.write("wow this is not rlly good")
 #https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/ad/512.png
-st.image("https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/ad/512.png")
+#st.image("https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/ad/512.png")
 
 class flaggle:
     def __init__(self):
-        st.write(10)
         flags_csv = pd.read_csv("flags_iso.csv")
         flags_csv = flags_csv.rename(columns={"Alpha-3 code": "iso", "Alpha-2 code": "iso2"})
         flags_csv["URL"] = list(map(lambda s: s.replace("small/tn_", ""), flags_csv["URL"]))
         self.flags_csv = flags_csv
         self.iso2 = self.flags_csv["iso2"]
-        st.write(11)
         self.countries = list(map(str.lower, self.flags_csv["Country"]))
         #self.iso = self.flags_csv["iso"]
         self.url = self.flags_csv["URL"]
         self.flags_csv_len = len(self.flags_csv)
-        st.write(12)
         self.flags_dict = {self.iso2[i]: {"country_name": self.countries[i], "flag_url": self.url[i]} for i in
                            range(self.flags_csv_len)}
         self.tries = 0
@@ -79,7 +76,6 @@ class flaggle:
             st.title("Better luck next time!")
             return self
         for i in range(self.count):
-            st.write(self.count)
             # st.write(f"i = {i}")
             # if 'guess_list' in st.session_state:
             # st.write(st.session_state.guess_list)
