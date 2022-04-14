@@ -6,8 +6,6 @@ import os
 st.set_page_config(page_title="Flaggle")#, page_icon=":world_map:")
 st.markdown("### Coded by [Abraham Holleran](https://github.com/Stonepaw90) :sunglasses:")
 
-def no_image_match(listt):
-    pass
 
 class flaggle:
     def __init__(self):
@@ -65,7 +63,9 @@ class flaggle:
         # st.write(f"count = {self.count}")
         if self.count > 6:
             try:
+                st.title(f"The answer was {self.COUNTRY_TEXT}.")
                 st.markdown("Your final guess resulted in" + self.to_print)
+                
             except:
                 pass
             st.title("Better luck next time!")
@@ -86,6 +86,7 @@ class flaggle:
                 self.to_print = to_print
                 st.markdown(to_print)
                 if to_print == "🟩" * self.country_len:
+                    to_print = ""
                     st.balloons()
                     st.title("You did it!!!")
                     break
