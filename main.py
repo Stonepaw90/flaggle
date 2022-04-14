@@ -9,6 +9,7 @@ from PIL import Image
 st.set_page_config(page_title="Flaggle", page_icon=":world_map:")
 st.markdown("### Coded by [Abraham Holleran](https://github.com/Stonepaw90) :sunglasses:")
 
+st.stop()
 
 class flaggle:
     def __init__(self):
