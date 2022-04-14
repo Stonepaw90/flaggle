@@ -53,7 +53,7 @@ class flaggle:
         #col[0].markdown(f"![What country flies this flag?]({self.country_dict['flag_url']})")
         col[1].image(self.country_dict['flag_url'], use_column_width=True, caption = "Country flag")
         col[0].image(f"https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/{self.secret_country}/512.png",
-        #            use_column_width = True, caption = "Country Outline")
+                    use_column_width = True, caption = "Country Outline")
         col[0].image(self.png, use_column_width=True, caption = "Country Outline")
 
     def print_blanks(self):
