@@ -12,20 +12,24 @@ st.markdown("### Coded by [Abraham Holleran](https://github.com/Stonepaw90) :sun
 
 class flaggle:
     def __init__(self):
+        st.write(10)
         flags_csv = pd.read_csv("flags_iso.csv")
         flags_csv = flags_csv.rename(columns={"Alpha-3 code": "iso", "Alpha-2 code": "iso2"})
         flags_csv["URL"] = list(map(lambda s: s.replace("small/tn_", ""), flags_csv["URL"]))
         self.flags_csv = flags_csv
         self.iso2 = self.flags_csv["iso2"]
+        st.write(11)
         self.countries = list(map(str.lower, self.flags_csv["Country"]))
         #self.iso = self.flags_csv["iso"]
         self.url = self.flags_csv["URL"]
         self.flags_csv_len = len(self.flags_csv)
+        st.write(12)
         self.flags_dict = {self.iso2[i]: {"country_name": self.countries[i], "flag_url": self.url[i]} for i in
                            range(self.flags_csv_len)}
         self.tries = 0
 
     def choose_country(self):
+        st.write("countrychoose")
         self.secret_flag_index = rand.randrange(self.flags_csv_len)
         self.secret_country = self.iso2[self.secret_flag_index]
         if self.tries < 6:
@@ -98,11 +102,15 @@ class flaggle:
 
 
 def main():
+    st.write("start")
     flaggle_game = flaggle()
+    st.write(1)
     flaggle_game.choose_country()
+    st.write(2)
     if 'flaggle' not in st.session_state:
         flaggle_game.initialize_flaggle()
         st.experimental_rerun()  # now this loop will not be hit again
+    st.write(3)
     flaggle_game = st.session_state['flaggle']
     flaggle_game.print_flag_and_png()
     flaggle_game.print_blanks()
