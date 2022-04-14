@@ -30,7 +30,7 @@ class flaggle:
     def choose_country(self):
         self.secret_flag_index = rand.randrange(self.flags_csv_len)
         self.secret_country = self.iso2[self.secret_flag_index]
-        self.png = Image.open("https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/ad/512.png")
+        #self.png = Image.open("https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/ad/512.png")
         """
         if self.tries < 6:
             try:
@@ -54,7 +54,7 @@ class flaggle:
         col[1].image(self.country_dict['flag_url'], use_column_width=True, caption = "Country flag")
         col[0].image(f"https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/{self.secret_country}/512.png",
                     use_column_width = True, caption = "Country Outline")
-        col[0].image(self.png, use_column_width=True, caption = "Country Outline")
+        #col[0].image(self.png, use_column_width=True, caption = "Country Outline")
 
     def print_blanks(self):
         blank_text = ['_'] * self.country_len
