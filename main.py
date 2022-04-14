@@ -1,18 +1,9 @@
 import streamlit as st
 import pandas as pd
 import random as rand
-from PIL import Image
 
-# import os
-# os.system(r"cd /D C:\Users\Abraham\miniconda3\envs\snowflakes\Scripts | streamlit run main.py")
-# os.system("streamlit run main.py")
 st.set_page_config(page_title="Flaggle")#, page_icon=":world_map:")
 st.markdown("### Coded by [Abraham Holleran](https://github.com/Stonepaw90) :sunglasses:")
-#st.write("wow this is not rlly good")
-#https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/ad/512.png
-thing = "ad"
-st.image(f"https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/{thing}/512.png")
-#st.stop()
 
 class flaggle:
     def __init__(self):
@@ -32,33 +23,15 @@ class flaggle:
     def choose_country(self):
         self.secret_flag_index = rand.randrange(self.flags_csv_len)
         self.secret_country = self.iso2[self.secret_flag_index]
-        #self.png = Image.open("https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/ad/512.png")
-        """
-        if self.tries < 6:
-            try:
-                #self.png = Image.open(f"\\all-512\\{self.secret_country}\\512.png")
-                self.png = Image.open(f"512.png")
-            except:
-                self.tries += 1
-                self.choose_country()
-                
-        else:
-            st.write("Error choosing")
-            st.stop()
-        """
         self.country_dict = self.flags_dict[self.secret_country]
         self.COUNTRY_TEXT = self.country_dict['country_name']
         self.country_len = len(self.COUNTRY_TEXT)
 
     def print_flag_and_png(self):
         col = st.columns(2)
-        #col[0].markdown(f"![What country flies this flag?]({self.country_dict['flag_url']})")
         col[1].image(self.country_dict['flag_url'], use_column_width=True, caption = "Country flag")
-        #st.write(f"https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/{self.secret_country.lower()}/512.png")
         col[0].image(f"https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/{self.secret_country.lower()}/512.png",
                     use_column_width=True, caption = "Country Outline")
-
-        #col[0].image(self.png, use_column_width=True, caption = "Country Outline")
 
     def print_blanks(self):
         blank_text = ['_'] * self.country_len
@@ -81,15 +54,9 @@ class flaggle:
             st.title("Better luck next time!")
             return self
         for i in range(self.count):
-            # st.write(f"i = {i}")
-            # if 'guess_list' in st.session_state:
-            # st.write(st.session_state.guess_list)
-            # if st.session_state.guess_list[max(i-1, 0)] != '':
-            #  st.write(f"Your {ordinal[i-1]} guess was {st.session_state.guess_list[i-1]}")
             st.session_state.guess_list[i] = st.text_input(f"What is your {ordinal[i]} guess?",
                                                            placeholder=self.blank_text,
                                                            max_chars=self.country_len).lower()
-
             if st.session_state.guess_list[i]:
                 to_print = ""
                 for idx, letter in enumerate(st.session_state.guess_list[i]):
