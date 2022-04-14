@@ -54,14 +54,9 @@ class flaggle:
         col = st.columns(2)
         #col[0].markdown(f"![What country flies this flag?]({self.country_dict['flag_url']})")
         col[1].image(self.country_dict['flag_url'], use_column_width=True, caption = "Country flag")
-        st.write(f"https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/{self.secret_country}/512.png")
-        st.image(f"https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/{self.secret_country}/512.png",
-                    caption = "Country Outline")
-        try:
-            st.image(f"https://github.com/Stonepaw90/flaggle/blob/main/all-512/{self.secret_country}/512.png",
-                    caption = "Country Outline")
-        except:
-            pass
+        #st.write(f"https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/{self.secret_country.lower()}/512.png")
+        col[0].image(f"https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/{self.secret_country.lower()}/512.png",
+                    use_column_width=True, caption = "Country Outline")
 
         #col[0].image(self.png, use_column_width=True, caption = "Country Outline")
 
