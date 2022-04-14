@@ -29,16 +29,16 @@ class flaggle:
         self.tries = 0
 
     def choose_country(self):
-        st.write("countrychoose")
         self.secret_flag_index = rand.randrange(self.flags_csv_len)
         self.secret_country = self.iso2[self.secret_flag_index]
         if self.tries < 6:
             try:
                 #self.png = Image.open(f"\\all-512\\{self.secret_country}\\512.png")
-                self.png = Image.open(f"/all-512/512.png")
+                self.png = Image.open(f"512.png")
             except:
-                self.choose_country()
                 self.tries += 1
+                self.choose_country()
+                
         else:
             st.write("Error choosing")
             st.stop()
@@ -102,15 +102,11 @@ class flaggle:
 
 
 def main():
-    st.write("start")
     flaggle_game = flaggle()
-    st.write(1)
     flaggle_game.choose_country()
-    st.write(2)
     if 'flaggle' not in st.session_state:
         flaggle_game.initialize_flaggle()
         st.experimental_rerun()  # now this loop will not be hit again
-    st.write(3)
     flaggle_game = st.session_state['flaggle']
     flaggle_game.print_flag_and_png()
     flaggle_game.print_blanks()
