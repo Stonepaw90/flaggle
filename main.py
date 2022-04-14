@@ -10,7 +10,9 @@ st.set_page_config(page_title="Flaggle")#, page_icon=":world_map:")
 st.markdown("### Coded by [Abraham Holleran](https://github.com/Stonepaw90) :sunglasses:")
 #st.write("wow this is not rlly good")
 #https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/ad/512.png
-#st.image("https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/ad/512.png")
+thing = "ad"
+st.image(f"https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/{thing}/512.png")
+st.stop()
 
 class flaggle:
     def __init__(self):
