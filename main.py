@@ -1,14 +1,16 @@
 import streamlit as st
 import pandas as pd
 import random as rand
-from PIL import Image
+#from PIL import Image
 
 # import os
 # os.system(r"cd /D C:\Users\Abraham\miniconda3\envs\snowflakes\Scripts | streamlit run main.py")
 # os.system("streamlit run main.py")
-st.set_page_config(page_title="Flaggle", page_icon=":world_map:")
+st.set_page_config(page_title="Flaggle")#, page_icon=":world_map:")
 st.markdown("### Coded by [Abraham Holleran](https://github.com/Stonepaw90) :sunglasses:")
-
+st.write("wow this is not good")
+#https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/ad/512.png
+#st.image("https://raw.githubusercontent.com/Stonepaw90/flaggle/main/all-512/ad/512.png")
 st.stop()
 
 class flaggle:
