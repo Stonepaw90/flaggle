@@ -94,6 +94,7 @@ class flaggle:
                     # self.to_print = ""
                     st.balloons()
                     st.title("You did it!!!")
+                    st.write("The country was " + self.country_capitalized + ".")
                     return self
         if self.count > 6:
             try:
