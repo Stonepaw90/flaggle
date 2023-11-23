@@ -9,30 +9,21 @@ import os
 st.set_page_config(page_title="Flaggle")  # , page_icon=":world_map:")
 st.markdown("### Coded by [Abraham Holleran](https://github.com/Stonepaw90) :sunglasses:")
 st.write("From just the outline and flag below, can you guess the country in six guesses?")
-st.write("Enter the first six letters of the country name.")
-
-
-def no_image_match(listt):
-    pass
-
+st.write("Enter the first six letters of the country name. Note that a 🟨 tells you the letter is used somewhere in the whole country name, not just in the first six letters.")
 
 class flaggle:
     def __init__(self):
         flags_csv = pd.read_csv("flags_iso2.csv")
         flags_csv = flags_csv.rename(columns={"Alpha-3 code": "iso", "Alpha-2 code": "iso2"})
-        no_images = ['mh', 'ps', 'tv', 'fm']  # these aren't matched with images
         flags_csv = flags_csv.drop(flags_csv.loc[flags_csv["iso2"] == "mh"].index)
         flags_csv = flags_csv.drop(flags_csv.loc[flags_csv["iso2"] == "ps"].index)
         flags_csv = flags_csv.drop(flags_csv.loc[flags_csv["iso2"] == "tv"].index)
-        flags_csv = flags_csv.drop(flags_csv.loc[flags_csv["iso2"] == "fm"].index)  # I couldn't get
-        # the list [flags_csv["iso2"] __ not in no_images] working
+        flags_csv = flags_csv.drop(flags_csv.loc[flags_csv["iso2"] == "fm"].index)
         flags_csv = flags_csv.reset_index(drop=True)
         # flags_csv = flags_csv[flags_csv["iso2"] not in no_images] #so these do have images
         flags_csv["URL"] = list(map(lambda s: s.replace("small/tn_", ""), flags_csv["URL"]))
         self.flags_csv = flags_csv
         self.iso2 = self.flags_csv["iso2"]
-        # all_512 = set(os.listdir("all-512"))
-        # st.write(set(self.iso2).difference(all_512)) #this is how we found no_images
         self.countries = list(map(str.lower, self.flags_csv["Country"]))
         self.countries_capitalized = self.flags_csv["Country"].to_list()
         self.countries_padded = [(i + "      ")[:6] for i in self.countries]
@@ -72,7 +63,7 @@ class flaggle:
         for i in range(self.country_len):
             if self.COUNTRY_TEXT[i] == " ":
                 blank_text[i] = ' '
-        self.blank_text = ''.join(blank_text)
+        return ''.join(blank_text)
         #st.title("The country name is " + self.blank_text + ".")
 
     def initialize_flaggle(self):
@@ -123,13 +114,14 @@ def main():
         flaggle_game.initialize_flaggle()
         st.rerun()  # now this loop will not be hit again
     flaggle_game = st.session_state['flaggle']
-    #flaggle_game.display_sidebar()
     flaggle_game.print_flag_and_png()
-    flaggle_game.print_blanks()
+    with st.expander("Need a hint? Click here."):
+        st.write("The country name looks like '" + flaggle_game.print_blanks() + "'")
     st.session_state['flaggle'] = flaggle_game.get_guess()
     if st.button("Try again with different flag"):
         del st.session_state['flaggle']
         del st.session_state.guess_list
+        st.write(st.session_state)
         st.rerun()
 
 
